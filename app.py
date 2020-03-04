@@ -3,7 +3,7 @@ import re
 # from flask_cors import CORS
 import pymongo
 from pymongo import MongoClient
-import flaskConfig as fc
+import pythonConfig as fc
 
 
 app = Flask(__name__)
@@ -25,5 +25,5 @@ def searchCompany():
 
     return jsonify({'result': test})
     
-# if __name__ == '__main__':
-#     app.run(debug = True, port = 8080)
+if __name__ == '__main__':
+    app.run(debug = True, port = 8080)
