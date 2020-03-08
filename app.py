@@ -9,28 +9,23 @@ import pythonConfig as fc
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return 'OK!'
+cluster = MongoClient(fc.mongoDB['client'])
+db = cluster["test"]
 
 
-# cluster = MongoClient(fc.mongoDB['client'])
-# db = cluster["test"]
+@app.route('/api/v2/compSearch', methods=['GET'])
+def searchCompany():
+    qry = request.args.get('q')
+    companies = db['SnP500Companies']
+    test = []
+    rgx = re.compile('.*' + qry+'.*', re.IGNORECASE)  # compile the regex
+    for x in companies.find({'concat': rgx}):
+        test.append(
+            {'name': x['name'],
+             'symbol': x['symbol']}
+        )
 
-
-# @app.route('/api/v2/compSearch', methods=['GET'])
-# def searchCompany():
-#     qry = request.args.get('q')
-#     companies = db['SnP500Companies']
-#     test = []
-#     rgx = re.compile('.*' + qry+'.*', re.IGNORECASE)  # compile the regex
-#     for x in companies.find({'concat': rgx}):
-#         test.append(
-#             {'name': x['name'],
-#              'symbol': x['symbol']}
-#         )
-
-#     return jsonify({'result': test})
+    return jsonify({'result': test})
 
 
 if __name__ == '__main__':
