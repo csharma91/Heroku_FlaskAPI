@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, url_for,redirect
+from flask import Flask, render_template, request, jsonify, url_for, redirect
 import re
 # from flask_cors import CORS
 import pymongo
@@ -11,21 +11,21 @@ app = Flask(__name__)
 cluster = MongoClient(fc.mongoDB['client'])
 db = cluster["test"]
 
-@app.route('/api/v2/compSearch',methods=['GET'])
+
+@app.route('/api/v2/compSearch', methods=['GET'])
 def searchCompany():
-    qry= request.args.get('q')
+    qry = request.args.get('q')
     companies = db['SnP500Companies']
     test = []
-    rgx = re.compile('.*' +qry+'.*', re.IGNORECASE)  # compile the regex
+    rgx = re.compile('.*' + qry+'.*', re.IGNORECASE)  # compile the regex
     for x in companies.find({'concat': rgx}):
         test.append(
             {'name': x['name'],
-            'symbol':x['symbol']}
+             'symbol': x['symbol']}
         )
 
     return jsonify({'result': test})
 
 
-    
 if __name__ == '__main__':
-    app.run(debug = True, port = 8080)
+    app.run(debug=True, port=8080)
