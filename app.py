@@ -7,6 +7,7 @@ import pythonConfig as fc
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 cluster = MongoClient(fc.mongoDB['client'])
