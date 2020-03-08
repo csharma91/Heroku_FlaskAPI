@@ -25,3 +25,7 @@ textAnalytics = {
 mongoDB = {
     'client': 'mongodb+srv://chintan123:chintan123@contactkeeper-xtowj.mongodb.net/test?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE'
 }
+
+test = {
+    'test': "test"
+}
