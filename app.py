@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect
 import re
-# from flask_cors import CORS
+from flask_cors import CORS
 import pymongo
 from pymongo import MongoClient
 import pythonConfig as fc
