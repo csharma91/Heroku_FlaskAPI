@@ -27,5 +27,5 @@ mongoDB = {
 }
 
 test = {
-    'test': "test"
+    'test': "testing"
 }
